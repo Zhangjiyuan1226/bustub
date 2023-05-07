@@ -142,17 +142,17 @@ class LRUKReplacer {
   size_t k_;
   // to protect the below private membership
   std::mutex latch_;
-  
+
   // FIXME(no thread safe!)
   // note : if we use lath_ to achieve thread safe, the program's performance is bad
   // we'd better use another latch_ to protect the build-in container
   // like some r-w latch
-  std::unordered_map<page_id_t, std::list<frame_id_t>::iterator>  map_history_;
+  std::unordered_map<page_id_t, std::list<frame_id_t>::iterator> map_history_;
   std::list<frame_id_t> list_history_;
 
-  std::unordered_map<page_id_t, std::list<frame_id_t>::iterator>  map_cache_;
+  std::unordered_map<page_id_t, std::list<frame_id_t>::iterator> map_cache_;
   std::list<frame_id_t> list_cache_;
-  
+
   // size_t means access time
   // bool means is evictable
   std::unordered_map<frame_id_t, std::pair<size_t, bool>> meta_info_;
