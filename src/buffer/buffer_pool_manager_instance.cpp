@@ -133,7 +133,9 @@ auto BufferPoolManagerInstance::UnpinPgImp(page_id_t page_id, bool is_dirty) -> 
   if (page_table_->Find(page_id, frame_id)) {
     // 在buffer pool中
     Page *page = &pages_[frame_id];
-    page->is_dirty_ = is_dirty;
+    if (is_dirty) {
+      page->is_dirty_ = is_dirty;
+    }
     if (page->GetPinCount() == 0) {
       return false;
     }
