@@ -18,6 +18,7 @@
 #include "storage/index/index_iterator.h"
 #include "storage/page/b_plus_tree_internal_page.h"
 #include "storage/page/b_plus_tree_leaf_page.h"
+#include "storage/page/page.h"
 
 namespace bustub {
 
@@ -53,8 +54,9 @@ class BPlusTree {
 
   // return the value associated with a given key
   auto GetValue(const KeyType &key, std::vector<ValueType> *result, Transaction *transaction = nullptr) -> bool;
-
-  // return the page id of the root node
+  auto FindLeafPage(const KeyType& key, Transaction* Transaction = nullptr) const -> Page*;
+  auto StartNewTree(const KeyType& key, const ValueType& value) -> bool;
+  auto InsertIntoParent(page_id_t node_page_id, KeyType& key, page_id_t new_node_page_id,  page_id_t parent_page_id, const KeyComparator& keyComparator) -> bool;// return the page id of the root node
   auto GetRootPageId() -> page_id_t;
 
   // index iterator
