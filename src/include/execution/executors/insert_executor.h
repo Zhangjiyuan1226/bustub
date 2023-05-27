@@ -1,15 +1,3 @@
-//===----------------------------------------------------------------------===//
-//
-//                         BusTub
-//
-// insert_executor.h
-//
-// Identification: src/include/execution/executors/insert_executor.h
-//
-// Copyright (c) 2015-2021, Carnegie Mellon University Database Group
-//
-//===----------------------------------------------------------------------===//
-
 #pragma once
 
 #include <memory>
@@ -57,6 +45,9 @@ class InsertExecutor : public AbstractExecutor {
  private:
   /** The insert plan node to be executed*/
   const InsertPlanNode *plan_;
+  std::unique_ptr<AbstractExecutor> childeren_;
+  TableInfo *table_info_ = nullptr;
+  bool is_success_ = false;
 };
 
 }  // namespace bustub
