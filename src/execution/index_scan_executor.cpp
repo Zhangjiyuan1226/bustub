@@ -15,8 +15,6 @@ namespace bustub {
 IndexScanExecutor::IndexScanExecutor(ExecutorContext *exec_ctx, const IndexScanPlanNode *plan)
     : AbstractExecutor(exec_ctx), plan_(plan), tree_(dynamic_cast<BPlusTreeIndexForOneIntegerColumn *>(exec_ctx_->GetCatalog()->GetIndex(plan_->GetIndexOid())->index_.get())),it_(tree_->GetBeginIterator()) {
   index_info_ = exec_ctx_->GetCatalog()->GetIndex(plan_->GetIndexOid());
-  tree_ = dynamic_cast<BPlusTreeIndexForOneIntegerColumn *>(index_info_->index_.get());
-  it_ = tree_->GetBeginIterator();
   table_info_ = exec_ctx_->GetCatalog()->GetTable(index_info_->table_name_);
 }
 
